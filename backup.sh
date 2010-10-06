@@ -3,7 +3,7 @@
 cp ~/.gitconfig .
 cp ~/.vimrc .
 cp ~/.autotest .
-cp -r ~/.vim .
+cp -R ~/.vim/ .
 
 git add .
 git commit -am "update dotfiles"
