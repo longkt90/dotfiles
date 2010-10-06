@@ -1,0 +1,12 @@
+[user]
+	name = Tien Le
+	email = tienlx@gmail.com
+[alias]
+	ci = commit
+	st = status
+	lg = log --color -n 10
+	lgg = log --graph --color -n 10
+
+[github]
+	user = infinity42
+	token = 24a45f0b6ac3451e379c2327d71db8a3
