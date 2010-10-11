@@ -7,5 +7,5 @@ cp -R ~/.vim/ .
 
 git st
 git add .
-git commit -am "update dotfiles"
+git commit -am "$1"
 git push origin master
