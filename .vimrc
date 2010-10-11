@@ -95,7 +95,7 @@ set cindent
 " Mapping keys
 "-----------------------------------------------------------------------------
 " remap Leader to , instead of \
-let mapleader = ","
+let mapleader = "/"
 map <F7> :cn<CR>
 
 " use ctrl + prev/next to browse tab
@@ -172,6 +172,12 @@ autocmd VimEnter * wincmd p
 "-----------------------------------------------------------------------------
 compiler rubyunit
 let g:rubytest_in_quickfix = 0              " minimal ruby test error message
+let g:rubytest_cmd_test = "ruby %p" 
+let g:rubytest_cmd_testcase = "ruby %p -n '/%c/'" 
+let g:rubytest_cmd_spec = "spec -f specdoc %p" 
+let g:rubytest_cmd_example = "spec -f specdoc %p -e '%c'" 
+let g:rubytest_cmd_feature = "cucumber %p" 
+let g:rubytest_cmd_story = "cucumber %p -n '%c'" 
 "au Filetype ruby call Foldsearch("")
 au Filetype ruby let b:foldsearchprefix='\v^\s*(#.*)?$'
 
@@ -186,4 +192,3 @@ let g:fuzzy_ignore = "*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;vendor/gem/**;vendor/p
 let g:fuf_splitPathMatching=1
 
 set shell /bin/sh
-cd ~/fun/xenng
