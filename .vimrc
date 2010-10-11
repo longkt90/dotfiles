@@ -147,6 +147,8 @@ nnoremap <Esc> :noh<CR><Esc>
 map <C-s> :w<CR>
 imap <C-s> <Esc>:w<CR>
 
+"Ctrl + Space to auto complete on local buff
+imap <C-Space> <C-P>
 "move to next/previous line with same indentation
 nnoremap <M-,> k:call search('^'. matchstr(getline(line('.')+1), '\(\s*\)') .'\S', 'b')<CR>^
 nnoremap <M-.> :call search('^'. matchstr(getline(line('.')), '\(\s*\)') .'\S')<CR>^
