@@ -9,4 +9,3 @@ git st
 git add .
 git commit -am "update dotfiles"
 git push origin master
-git lg
