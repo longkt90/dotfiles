@@ -6,7 +6,8 @@
 	st = status
 	lg = log --color -n 10
 	lgg = log --graph --color -n 10
+	logl = log --pretty=oneline --abbrev-commit --color
 
 [github]
-	user = infinity42
+	user = tienle
 	token = 24a45f0b6ac3451e379c2327d71db8a3
