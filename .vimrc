@@ -64,6 +64,13 @@ set mat=5                             " bracket blinking
 set novisualbell                      " no blinking
 set noerrorbell                       " no noise
 
+highlight ExtraWhitespace ctermbg=yellow guibg=yellow
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
 "-----------------------------------------------------------------------------
 " Text formatting
 "-----------------------------------------------------------------------------
