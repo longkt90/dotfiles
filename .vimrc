@@ -111,25 +111,26 @@ map <F7> :cn<CR>
 "map <C-N> :tabnew<CR>
 "map <C-T> :tabnex<CR>:cd %:p:h<CR>:<CR>
 "Ctrl-left arrow – move one tab to the left
-map <C-left> :tabp<CR>
+"map <C-left> :tabp<CR>
 
 "Ctrl-right arrow – move one tab to the right
-map <C-right> :tabn<CR>
+"map <C-right> :tabn<CR>
 
 "save
-map <C-S> :w<CR> 
 "map <C-h> <C-w>h
 "map <C-j> <C-w>j
 "map <C-k> <C-w>k
 "map <C-l> <C-w>l
-map <C-J> :m +1 <CR>
-map <C-K> :m -2 <CR>
+
+map <M-J> :m +1 <CR>
+map <M-K> :m -2 <CR>
+vnoremap <M-J> dp'[V']
+vnoremap <M-K> dkP'[V']
 map <F2> :NERDTreeToggle<CR>
 nmap <tab> v>
 
 vmap <tab> >gv
-vmap <TAB> >gv
-vmap <s-TAB> <gv
+vmap <tab> >gv
 
 "a trick for sudo save
 cmap w!! w !sudo tee % >/dev/null
@@ -138,15 +139,17 @@ cmap w!! w !sudo tee % >/dev/null
 imap ;; <Esc>
 imap jk <Esc>
 imap <s-CR> <CR><CR>end<Esc>ki
-imap <M-k> <C-x><C-o>
-inoremap <Left> <NOP>
-inoremap <Right> <NOP>
+"inoremap <Left> <NOP>
 "Enable arrow key for FuzzyFinder
 "inoremap <Up> <NOP>
 "inoremap <Down> <NOP>
 nnoremap <silent> <F3> :TlistToggle<CR>
 nnoremap <silent> <F4> :FufFile<CR>
-nnoremap <Leader>ff :FufFile<CR>
+nnoremap <Leader>f :FufFile<CR>
+"recursive search for FufFile
+let g:fuf_abbrevMap = {
+  \   "^ " : [ "**/", ],
+  \ }
 "clear highlight search
 nnoremap <Esc> :noh<CR><Esc>
 
@@ -160,7 +163,7 @@ imap <C-Space> <C-P>
 nnoremap <M-,> k:call search('^'. matchstr(getline(line('.')+1), '\(\s*\)') .'\S', 'b')<CR>^
 nnoremap <M-.> :call search('^'. matchstr(getline(line('.')), '\(\s*\)') .'\S')<CR>^
 
-"autotest 
+"autotest
 nmap <Leader>fd :cf /tmp/autotest.txt<CR> :compiler rubyunit<CR>
 
 
@@ -181,12 +184,12 @@ autocmd VimEnter * wincmd p
 "-----------------------------------------------------------------------------
 compiler rubyunit
 let g:rubytest_in_quickfix = 0              " minimal ruby test error message
-let g:rubytest_cmd_test = "ruby %p" 
-let g:rubytest_cmd_testcase = "ruby %p -n '/%c/'" 
-let g:rubytest_cmd_spec = "spec -f specdoc %p" 
-let g:rubytest_cmd_example = "spec -f specdoc %p -e '%c'" 
-let g:rubytest_cmd_feature = "cucumber %p" 
-let g:rubytest_cmd_story = "cucumber %p -n '%c'" 
+let g:rubytest_cmd_test = "ruby %p"
+let g:rubytest_cmd_testcase = "ruby %p -n '/%c/'"
+let g:rubytest_cmd_spec = "spec -f specdoc %p"
+let g:rubytest_cmd_example = "spec -f specdoc %p -e '%c'"
+let g:rubytest_cmd_feature = "cucumber %p"
+let g:rubytest_cmd_story = "cucumber %p -n '%c'"
 "au Filetype ruby call Foldsearch("")
 au Filetype ruby let b:foldsearchprefix='\v^\s*(#.*)?$'
 
@@ -199,5 +202,16 @@ let tlist_ant_settings = 'ant;p:Project;r:Property;t:Target'
 "let Tlist_Ctags_Cmd = $VIM.'/vimfiles/ctags.exe' " location of ctags tool
 let g:fuzzy_ignore = "*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;vendor/gem/**;vendor/plugins/**;coverage/**;tmp/**;rdoc/**"
 let g:fuf_splitPathMatching=1
+
+" Auto indicating changes
+"let g:changes_autocmd=1
+let g:changes_vcs_system='git'
+
+"Mini buffer
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+
 
 set shell /bin/sh
