@@ -71,6 +71,8 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
+autocmd BufWritePre * :%s/\s\+$//e
+
 "-----------------------------------------------------------------------------
 " Text formatting
 "-----------------------------------------------------------------------------
@@ -102,7 +104,7 @@ set cindent
 " Mapping keys
 "-----------------------------------------------------------------------------
 " remap Leader to , instead of \
-let mapleader = "/"
+"let mapleader = "/"
 map <F7> :cn<CR>
 
 " use ctrl + prev/next to browse tab
@@ -200,6 +202,10 @@ let Tlist_Enable_Fold_Column = 0  " no fold column (only showing one file)
 let tlist_sql_settings = 'sql;P:package;t:table'
 let tlist_ant_settings = 'ant;p:Project;r:Property;t:Target'
 "let Tlist_Ctags_Cmd = $VIM.'/vimfiles/ctags.exe' " location of ctags tool
+set tags=tags;/
+"auto update ctags after file was saved
+au BufWritePost .rb,.c,.cpp,*.h silent! !ctags -R &
+map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 let g:fuzzy_ignore = "*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;vendor/gem/**;vendor/plugins/**;coverage/**;tmp/**;rdoc/**"
 let g:fuf_splitPathMatching=1
 
