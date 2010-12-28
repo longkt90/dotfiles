@@ -147,11 +147,13 @@ imap <s-CR> <CR><CR>end<Esc>ki
 "inoremap <Down> <NOP>
 nnoremap <silent> <F3> :TlistToggle<CR>
 nnoremap <silent> <F4> :FufFile<CR>
+nnoremap <silent> <F5> :FufBuffer<CR>
 nnoremap <Leader>f :FufFile<CR>
 "recursive search for FufFile
 let g:fuf_abbrevMap = {
   \   "^ " : [ "**/", ],
   \ }
+let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
 "clear highlight search
 nnoremap <Esc> :noh<CR><Esc>
 
