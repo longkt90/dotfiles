@@ -44,7 +44,6 @@ set ruler                             " show cursor position all the time
 set nolazyredraw
 set number                            " set line number on
 set wildmenu
-set wildmode=list:longest, full
 set ch=1                              " command line height
 set backspace=2
 set report=0                          " tell us about changes
@@ -62,7 +61,6 @@ set incsearch
 set ignorecase                        " case insensitive search
 set mat=5                             " bracket blinking
 set novisualbell                      " no blinking
-set noerrorbell                       " no noise
 
 highlight ExtraWhitespace ctermbg=yellow guibg=yellow
 match ExtraWhitespace /\s\+$/
@@ -175,7 +173,6 @@ nmap <Leader>fd :cf /tmp/autotest.txt<CR> :compiler rubyunit<CR>
 " Auto commands
 "-----------------------------------------------------------------------------
 " Edit .vimrc
-command! vimrc :e ~/.vimrc
 au! BufRead,BufNewFile *.haml setfiletype haml
 
 "auto open NERDTree when start
@@ -222,4 +219,3 @@ let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 
 
-set shell /bin/sh

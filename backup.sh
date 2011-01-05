@@ -2,10 +2,11 @@
 
 cp ~/.gitconfig .
 cp ~/.vimrc .
+cp ~/.gvimrc .
 cp ~/.autotest .
 cp -R ~/.vim/ .
 
-git st
+git status
 git add .
 git commit -am "$1"
 git push origin master
