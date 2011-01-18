@@ -12,12 +12,22 @@ set isk+=_,$,@,%,#,-
 set modeline
 set autoread                          " reload file
 set tabpagemax=50                     " open 50 tabs max
+set splitbelow                        " Split windows at bottom
+"set timeoutlen=1200                   " A little bit more time for macros
+"set ttimeoutlen=50                    " Make Esc work faster
+if v:version >= 700
+  set viminfo=!,'20,<50,s10,h
+endif
 
+set undodir=~/tmp
+set undofile
+set undolevels = 1000
+set undoreload = 10000
 
 "-----------------------------------------------------------------------------
 " Colors/ Theme
 "-----------------------------------------------------------------------------
-colo mustang
+colo bocau
 set guifont=ProggyCleanTT\ 11
 
 if has("syntax")
@@ -41,7 +51,11 @@ set directory=/tmp
 " UI
 "-----------------------------------------------------------------------------
 set ruler                             " show cursor position all the time
-set nolazyredraw
+if has("mac")
+  silent! set nomacatsui
+else
+  set lazyredraw
+endif
 set number                            " set line number on
 set wildmenu
 set ch=1                              " command line height
@@ -126,7 +140,14 @@ map <M-J> :m +1 <CR>
 map <M-K> :m -2 <CR>
 vnoremap <M-J> dp'[V']
 vnoremap <M-K> dkP'[V']
+
+"NERD Tree
+let g:NERDCreateDefaultMappings = 0
+let g:NERDSpaceDelims = 1
+let g:NERDShutUp = 1
+let g:NERDTreeHijackNetrw = 0
 map <F2> :NERDTreeToggle<CR>
+
 nmap <tab> v>
 
 vmap <tab> >gv
@@ -144,20 +165,24 @@ imap <s-CR> <CR><CR>end<Esc>ki
 "inoremap <Up> <NOP>
 "inoremap <Down> <NOP>
 nnoremap <silent> <F3> :TlistToggle<CR>
-nnoremap <silent> <F4> :FufFile<CR>
-nnoremap <silent> <F5> :FufBuffer<CR>
-nnoremap <Leader>f :FufFile<CR>
+nnoremap <silent> <F4> :CommandT<CR>
+"nnoremap <silent> <F4> :FufFile<CR>
+"nnoremap <silent> <F5> :FufBuffer<CR>
+"nnoremap <Leader>f :FufFile<CR>
 "recursive search for FufFile
-let g:fuf_abbrevMap = {
-  \   "^ " : [ "**/", ],
-  \ }
-let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
+"let g:fuf_abbrevMap = {
+"  \   "^ " : [ "**/", ],
+"  \ }
+"let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
 "clear highlight search
 nnoremap <Esc> :noh<CR><Esc>
 
 "Ctrl + S to save
 map <C-s> :w<CR>
 imap <C-s> <Esc>:w<CR>
+
+" open URL under cursor in browser
+nnoremap gG :OpenURL http://www.google.com/search?q=<cword><CR>
 
 "Ctrl + Space to auto complete on local buff
 imap <C-Space> <C-P>
@@ -205,8 +230,8 @@ set tags=tags;/
 "auto update ctags after file was saved
 au BufWritePost .rb,.c,.cpp,*.h silent! !ctags -R &
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
-let g:fuzzy_ignore = "*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;vendor/gem/**;vendor/plugins/**;coverage/**;tmp/**;rdoc/**"
-let g:fuf_splitPathMatching=1
+"let g:fuzzy_ignore = "*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;vendor/gem/**;vendor/plugins/**;coverage/**;tmp/**;rdoc/**"
+"let g:fuf_splitPathMatching=1
 
 " Auto indicating changes
 "let g:changes_autocmd=1
