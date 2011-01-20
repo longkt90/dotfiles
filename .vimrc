@@ -21,8 +21,8 @@ endif
 
 set undodir=~/tmp
 set undofile
-set undolevels = 1000
-set undoreload = 10000
+set undolevels=1000
+set undoreload=10000
 
 "-----------------------------------------------------------------------------
 " Colors/ Theme
