@@ -5,6 +5,7 @@ cp ~/.vimrc .
 cp ~/.gvimrc .
 cp ~/.autotest .
 cp ~/.ackrc .
+cp ~/.inputrc .
 cp -R ~/.vim/ .
 
 git status
