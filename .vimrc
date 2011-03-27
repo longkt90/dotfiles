@@ -227,4 +227,5 @@ let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 
-
+" Indent guides
+"let g:indent_guides_guide_size = 1

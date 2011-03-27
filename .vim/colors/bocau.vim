@@ -90,6 +90,9 @@ highlight link diffRemoved      Statement
 highlight link diffLine         PreProc
 highlight link diffSubname      Comment
 
+hi IndentGuidesOdd  guibg=#111111 ctermbg=darkgrey
+hi IndentGuidesEven guibg=#000000 ctermbg=black
+
 call s:hifg("Normal","#EEEEEE","White",87)
 if &background == "light" || has("gui_running")
     hi Normal guibg=Black ctermbg=Black
