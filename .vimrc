@@ -81,7 +81,6 @@ set nowrap
 set tabstop=2
 set softtabstop=2
 set nosmarttab
-set expandtab
 set formatoptions+=n
 set shiftwidth=2
 set encoding=utf-8
@@ -89,6 +88,7 @@ set vb t_vb=
 set virtualedit=all
 set textwidth=80
 set smartcase
+set expandtab
 
 set foldmethod=syntax
 set foldnestmax=10
@@ -128,6 +128,7 @@ map <M-K> :m -2 <CR>
 vnoremap <M-J> dp'[V']
 vnoremap <M-K> dkP'[V']
 map <F2> :NERDTreeToggle<CR>
+map <Leader>a :Ack <cword><CR>
 "nmap <tab> v>
 
 "vmap <tab> >gv
@@ -148,9 +149,12 @@ nnoremap gG :OpenURL http://www.google.com/search?q=<cword><CR>
 "inoremap <Up> <NOP>
 "inoremap <Down> <NOP>
 nnoremap <silent> <F3> :TlistToggle<CR>
-nnoremap <silent> <F4> :FufFile<CR>
-nnoremap <silent> <F5> :FufBuffer<CR>
-nnoremap <Leader>f :FufFile<CR>
+nnoremap <silent> <F4> :CommandT<CR>
+nnoremap <silent> <F5> :CommandTBuffer<CR>
+nnoremap <Leader>f :CommandTFlush<CR>
+"nnoremap <silent> <F4> :FufFile<CR>
+"nnoremap <silent> <F5> :FufBuffer<CR>
+"nnoremap <Leader>f :FufFile<CR>
 "recursive search for FufFile
 let g:fuf_abbrevMap = {
   \   "^ " : [ "**/", ],
