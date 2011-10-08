@@ -13,6 +13,8 @@ set modeline
 set autoread                          " reload file
 set tabpagemax=50                     " open 50 tabs max
 set splitbelow
+set undodir=~/.vim/undodir
+set undofile
 
 
 "-----------------------------------------------------------------------------

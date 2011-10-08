@@ -3,6 +3,7 @@
 	email = tienlx@gmail.com
 [alias]
 	ci = commit
+	co = checkout
 	st = status
 	lg = log --color -n 10
 	lgg = log --graph --color -n 10
@@ -16,3 +17,5 @@
 	changed = yellow
 	added = green
 	untracked = red
+[merge]
+	tool = meld
