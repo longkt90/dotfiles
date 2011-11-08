@@ -124,6 +124,8 @@ map <F7> :cn<CR>
 "map <C-j> <C-w>j
 "map <C-k> <C-w>k
 "map <C-l> <C-w>l
+nnoremap <C-H> ^
+nnoremap <C-L> $
 
 map <M-J> :m +1 <CR>
 map <M-K> :m -2 <CR>
@@ -217,6 +219,8 @@ let tlist_sql_settings = 'sql;P:package;t:table'
 let tlist_ant_settings = 'ant;p:Project;r:Property;t:Target'
 "let Tlist_Ctags_Cmd = $VIM.'/vimfiles/ctags.exe' " location of ctags tool
 set tags=tags;/
+let g:rails_ctags_arguments = "`gem env gemdir`/gems"
+
 "auto update ctags after file was saved
 au BufWritePost .rb,.c,.cpp,*.h silent! !ctags -R &
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>

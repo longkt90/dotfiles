@@ -7,6 +7,8 @@ cp ~/.autotest .
 cp ~/.ackrc .
 cp ~/.inputrc .
 cp ~/.zshrc .
+cp ~/.gemrc .
+cp ~/.rdebugrc .
 cp -R ~/.vim/ .
 
 git status
