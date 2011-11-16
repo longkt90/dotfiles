@@ -102,8 +102,7 @@ set cinwords=if,else,while,do,for,switch,case
 set cindent
 
 "-----------------------------------------------------------------------------
-" Mapping keys
-"-----------------------------------------------------------------------------
+" Mapping keys "-----------------------------------------------------------------------------
 " remap Leader to , instead of \
 "let mapleader = "/"
 map <F7> :cn<CR>
@@ -124,8 +123,6 @@ map <F7> :cn<CR>
 "map <C-j> <C-w>j
 "map <C-k> <C-w>k
 "map <C-l> <C-w>l
-nnoremap <C-H> ^
-nnoremap <C-L> $
 
 map <M-J> :m +1 <CR>
 map <M-K> :m -2 <CR>
