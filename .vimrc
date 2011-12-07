@@ -96,13 +96,14 @@ set foldmethod=syntax
 set foldnestmax=10
 set nofoldenable                        "don't fold by default
 set foldlevel=1
-set clipboard+=unnamed                  " yanks go on clipboard instead
+"set clipboard+=unnamed                  " yanks go on clipboard instead
 set cinoptions=:0,p0,t0
 set cinwords=if,else,while,do,for,switch,case
 set cindent
 
 "-----------------------------------------------------------------------------
-" Mapping keys "-----------------------------------------------------------------------------
+" Mapping keys
+"-----------------------------------------------------------------------------
 " remap Leader to , instead of \
 "let mapleader = "/"
 map <F7> :cn<CR>
@@ -128,6 +129,8 @@ map <M-J> :m +1 <CR>
 map <M-K> :m -2 <CR>
 vnoremap <M-J> dp'[V']
 vnoremap <M-K> dkP'[V']
+"noremap H ^
+"noremap L $
 map <F2> :NERDTreeToggle<CR>
 map <Leader>a :Ack <cword><CR>
 "nmap <tab> v>
@@ -144,6 +147,7 @@ imap jk <Esc>
 imap kj <Esc>
 imap <s-CR> <CR><CR>end<Esc>ki
 nnoremap gG :OpenURL http://www.google.com/search?q=<cword><CR>
+nnoremap gA :Ack <cword><CR>
 
 "inoremap <Left> <NOP>
 "Enable arrow key for FuzzyFinder
@@ -176,6 +180,11 @@ nnoremap <M-.> :call search('^'. matchstr(getline(line('.')), '\(\s*\)') .'\S')<
 
 "autotest
 nmap <Leader>fd :cf /tmp/autotest.txt<CR> :compiler rubyunit<CR>
+
+"rspec test
+map <Leader>r :SweetSpec<CR>
+map <Leader>R :SweetSpecRunAtLine<CR>
+map <Leader>L :SweetSpecRunLast<CR>
 
 
 "-----------------------------------------------------------------------------
@@ -215,6 +224,7 @@ let Tlist_Enable_Fold_Column = 0  " no fold column (only showing one file)
 let tlist_sql_settings = 'sql;P:package;t:table'
 let tlist_ant_settings = 'ant;p:Project;r:Property;t:Target'
 "let Tlist_Ctags_Cmd = $VIM.'/vimfiles/ctags.exe' " location of ctags tool
+let g:rails_ctags_arguments = "`gem env gemdir`/gems"
 set tags=tags;/
 let g:rails_ctags_arguments = "`gem env gemdir`/gems"
 
@@ -236,3 +246,10 @@ let g:miniBufExplModSelTarget = 1
 
 " Indent guides
 "let g:indent_guides_guide_size = 1
+
+"test for fun
+"noremap j h
+"noremap k j
+"noremap i k
+"noremap h i
+"
