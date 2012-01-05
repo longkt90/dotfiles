@@ -146,6 +146,10 @@ cmap w!! w !sudo tee % >/dev/null
 imap jk <Esc>
 imap kj <Esc>
 imap <s-CR> <CR><CR>end<Esc>ki
+
+"Expand current file's path
+cnoremap <C-F> <C-R>=expand('%:p:h')<CR>
+
 nnoremap gG :OpenURL http://www.google.com/search?q=<cword><CR>
 nnoremap gA :Ack <cword><CR>
 
@@ -243,6 +247,7 @@ let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
+let g:CommandTMatchWindowAtTop = 1
 
 " Indent guides
 "let g:indent_guides_guide_size = 1

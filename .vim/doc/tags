@@ -77,6 +77,7 @@
 :CommandT	command-t.txt	/*:CommandT*
 :CommandTBuffer	command-t.txt	/*:CommandTBuffer*
 :CommandTFlush	command-t.txt	/*:CommandTFlush*
+:CommandTJumps	command-t.txt	/*:CommandTJumps*
 :DC	ChangesPlugin.txt	/*:DC*
 :DisableChanges	ChangesPlugin.txt	/*:DisableChanges*
 :EC	ChangesPlugin.txt	/*:EC*
@@ -513,6 +514,7 @@ g:CommandTCursorStartMap	command-t.txt	/*g:CommandTCursorStartMap*
 g:CommandTDeleteMap	command-t.txt	/*g:CommandTDeleteMap*
 g:CommandTMatchWindowAtTop	command-t.txt	/*g:CommandTMatchWindowAtTop*
 g:CommandTMatchWindowReverse	command-t.txt	/*g:CommandTMatchWindowReverse*
+g:CommandTMaxCachedDirectories	command-t.txt	/*g:CommandTMaxCachedDirectories*
 g:CommandTMaxDepth	command-t.txt	/*g:CommandTMaxDepth*
 g:CommandTMaxFiles	command-t.txt	/*g:CommandTMaxFiles*
 g:CommandTMaxHeight	command-t.txt	/*g:CommandTMaxHeight*
@@ -588,6 +590,7 @@ g:snippets_dir	snipMate.txt	/*g:snippets_dir*
 g:snips_author	snipMate.txt	/*g:snips_author*
 g:textobj_rubyblock_no_default_key_mappings	textobj-rubyblock.txt	/*g:textobj_rubyblock_no_default_key_mappings*
 global-example	yankring.txt	/*global-example*
+greplace.txt	greplace.txt	/*greplace.txt*
 i_CTRL-G_S	surround.txt	/*i_CTRL-G_S*
 i_CTRL-G_s	surround.txt	/*i_CTRL-G_s*
 i_CTRL-R_<Tab>	snipMate.txt	/*i_CTRL-R_<Tab>*
