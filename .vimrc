@@ -162,8 +162,10 @@ nnoremap gA :Ack <cword><CR>
 "inoremap <Down> <NOP>
 nnoremap <silent> <F3> :TlistToggle<CR>
 nnoremap <silent> <F4> :CommandT<CR>
+nnoremap <Leader><Space> :CommandT<CR>
 let MRU_Max_Entries = 400
 nnoremap <silent> <F5> :MRU<CR>
+nnoremap <Leader>j :MRU<CR>
 nnoremap <silent> <F6> :CommandTBuffer<CR>
 nnoremap <Leader>f :CommandTFlush<CR>
 set wildignore+=*.o,*.obj,.git
