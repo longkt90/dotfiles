@@ -145,6 +145,9 @@ cmap w!! w !sudo tee % >/dev/null
 "imap ;; <Esc>
 imap jk <Esc>
 imap kj <Esc>
+"Remap VIM 0
+noremap 0 ^
+noremap ^ 0
 imap <s-CR> <CR><CR>end<Esc>ki
 
 "Expand current file's path
