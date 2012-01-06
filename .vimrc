@@ -105,7 +105,7 @@ set cindent
 " Mapping keys
 "-----------------------------------------------------------------------------
 " remap Leader to , instead of \
-"let mapleader = "/"
+let mapleader = ","
 map <F7> :cn<CR>
 
 " use ctrl + prev/next to browse tab
