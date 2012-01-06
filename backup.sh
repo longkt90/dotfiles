@@ -13,5 +13,7 @@ cp -R ~/.vim/ .
 
 git status
 git add .
-git commit -am "$1"
-git push origin master
+if ["$1" != ""]; then
+  git commit -am "$1"
+  git push origin master
+fi

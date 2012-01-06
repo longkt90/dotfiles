@@ -52,9 +52,21 @@ set backspace=2
 set report=0                          " tell us about changes
 set guioptions=aegitcm
 win 180 50
-set laststatus=2                      " always show status line
 set mousehide                         " hide mouse after chars typed
 set mouse=a                           " mouse in all modes
+
+if has('statusline')
+  set laststatus=2                      " always show status line
+
+  " Broken down into easily includeable segments
+  set statusline=%<%f\    " Filename
+  set statusline+=%w%h%m%r " Options
+  set statusline+=%{fugitive#statusline()} "  Git Hotness
+  set statusline+=\ [%{&ff}/%Y]            " filetype
+  set statusline+=\ [%{getcwd()}]          " current dir
+  "set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
+  set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+endif
 
 "-----------------------------------------------------------------------------
 " Visual cues
@@ -129,6 +141,8 @@ map <M-J> :m +1 <CR>
 map <M-K> :m -2 <CR>
 vnoremap <M-J> dp'[V']
 vnoremap <M-K> dkP'[V']
+vnoremap < <gv
+vnoremap > >gv
 "noremap H ^
 "noremap L $
 map <F2> :NERDTreeToggle<CR>
