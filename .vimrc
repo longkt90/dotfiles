@@ -181,7 +181,7 @@ let MRU_Max_Entries = 400
 nnoremap <silent> <F5> :MRU<CR>
 nnoremap <Leader>j :MRU<CR>
 nnoremap <silent> <F6> :CommandTBuffer<CR>
-nnoremap <Leader>f :CommandTFlush<CR>
+nnoremap <Leader>f <C-^>
 set wildignore+=*.o,*.obj,.git
 
 "nnoremap <silent> <F4> :FufFile<CR>
@@ -274,10 +274,3 @@ let g:CommandTMatchWindowAtTop = 1
 
 " Indent guides
 "let g:indent_guides_guide_size = 1
-
-"test for fun
-"noremap j h
-"noremap k j
-"noremap i k
-"noremap h i
-"
