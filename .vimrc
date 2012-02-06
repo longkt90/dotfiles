@@ -1,20 +1,73 @@
+set nocompatible
+
+"-----------------------------------------------------------------------------
+" Vundle
+"-----------------------------------------------------------------------------
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+" My Bundles here:
+"
+" original repos on github
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-pathogen'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-rails.git'
+Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-bundler'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-repeat'
+Bundle 'godlygeek/tabular'
+Bundle 'mutewinter/vim-indent-guides'
+Bundle 'pangloss/vim-javascript'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'leshill/vim-json'
+Bundle 'kana/vim-textobj-user'
+Bundle 'nelstrom/vim-textobj-rubyblock'
+Bundle 'vim-scripts/ZoomWin'
+Bundle 'vim-scripts/matchit.zip'
+Bundle 'vim-scripts/greplace.vim'
+Bundle 'itspriddle/vim-jquery'
+Bundle 'fholgado/minibufexpl.vim'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'snipmate-snippets'
+Bundle 'garbas/vim-snipmate'
+Bundle 'kien/ctrlp.vim'
+Bundle 'mileszs/ack.vim'
+Bundle 'garbas/vim-snipmate'
+Bundle 'vim-ruby/vim-ruby'
+
+" vim-scripts repos
+Bundle 'L9'
+Bundle 'vis'
+Bundle 'bocau'
+
 "-----------------------------------------------------------------------------
 " General
 "-----------------------------------------------------------------------------
-set nocompatible
 set history=1024
 set cf                                " enable error files and error jumping
 set ffs=unix,dos,mac                  " support these files
-filetype on
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 set isk+=_,$,@,%,#,-
 set modeline
 set autoread                          " reload file
 set tabpagemax=50                     " open 50 tabs max
 set splitbelow
-set undodir=~/.vim/undodir
-set undofile
+if version>=730
+  set undodir=/tmp
+  set undofile
+  set undolevels=1000
+endif
 
 
 "-----------------------------------------------------------------------------
@@ -48,7 +101,7 @@ set nolazyredraw
 set number                            " set line number on
 set wildmenu
 set ch=1                              " command line height
-set backspace=2
+set backspace=indent,eol,start        " backspace through everything in insert mode
 set report=0                          " tell us about changes
 set guioptions=aegitcm
 win 180 50
@@ -56,7 +109,7 @@ set mousehide                         " hide mouse after chars typed
 set mouse=a                           " mouse in all modes
 
 if has('statusline')
-  set laststatus=2                      " always show status line
+  set laststatus=2                    " always show status line
 
   " Broken down into easily includeable segments
   set statusline=%<%f\    " Filename
@@ -103,6 +156,16 @@ set virtualedit=all
 set textwidth=80
 set smartcase
 set expandtab
+set list
+" List chars
+set listchars=""                  " Reset the listchars
+set listchars=tab:\ \             " a tab should display as "  ", trailing whitespace as "."
+set listchars+=trail:.            " show trailing spaces as dots
+set listchars+=extends:>          " The character to show in the last column when wrap is
+                                  " off and the line continues beyond the right of the screen
+set listchars+=precedes:<         " The character to show in the last column when wrap is
+                                  " off and the line continues beyond the right of the screen
+
 
 set foldmethod=syntax
 set foldnestmax=10
@@ -118,24 +181,25 @@ set cindent
 "-----------------------------------------------------------------------------
 " remap Leader to , instead of \
 let mapleader = ","
-map <F7> :cn<CR>
-
-" use ctrl + prev/next to browse tab
-"map [5^ gT
-"map [6^ gt
-"map <C-N> :tabnew<CR>
-"map <C-T> :tabnex<CR>:cd %:p:h<CR>:<CR>
-"Ctrl-left arrow – move one tab to the left
-"map <C-left> :tabp<CR>
-
-"Ctrl-right arrow – move one tab to the right
-"map <C-right> :tabn<CR>
 
 "save
 "map <C-h> <C-w>h
 "map <C-j> <C-w>j
 "map <C-k> <C-w>k
 "map <C-l> <C-w>l
+
+if has("gui_macvim") && has("gui_running")
+  imap <D-]> <Esc>>>i
+  imap <D-[> <Esc><<i
+else
+  imap <A-]> <Esc>>>i
+  imap <A-[> <Esc><<i
+endif
+
+" format the entire file
+nmap <leader>fef ggVG=
+
+nmap <leader>q :bd<CR>
 
 map <M-J> :m +1 <CR>
 map <M-K> :m -2 <CR>
@@ -162,31 +226,25 @@ imap kj <Esc>
 "Remap VIM 0
 noremap 0 ^
 noremap ^ 0
-imap <s-CR> <CR><CR>end<Esc>ki
 
 "Expand current file's path
 cnoremap <C-F> <C-R>=expand('%:p:h')<CR>
 
 nnoremap gG :OpenURL http://www.google.com/search?q=<cword><CR>
-nnoremap gA :Ack <cword><CR>
+nnoremap gA :Ack! <cword><CR>
 
-"inoremap <Left> <NOP>
-"Enable arrow key for FuzzyFinder
-"inoremap <Up> <NOP>
-"inoremap <Down> <NOP>
 nnoremap <silent> <F3> :TlistToggle<CR>
-nnoremap <silent> <F4> :CommandT<CR>
-nnoremap <Leader><Space> :CommandT<CR>
+let g:ctrlp_map = '<Leader><Space>'
+let g:ctrlp_working_path_mode = 2
+let g:ctrlp_match_window_bottom = 0
+let g:ctrlp_match_window_reversed = 0
+
 let MRU_Max_Entries = 400
-nnoremap <silent> <F5> :MRU<CR>
-nnoremap <Leader>j :MRU<CR>
-nnoremap <silent> <F6> :CommandTBuffer<CR>
-nnoremap <Leader>f <C-^>
+nnoremap <Leader>m :CtrlPMRU<CR>
+nnoremap <Leader>b :CtrlPBuffer<CR>
+"nnoremap <Leader>f <C-^>
 set wildignore+=*.o,*.obj,.git
 
-"nnoremap <silent> <F4> :FufFile<CR>
-"nnoremap <silent> <F5> :FufBuffer<CR>
-"nnoremap <Leader>f :FufFile<CR>
 "recursive search for FufFile
 let g:fuf_abbrevMap = {
   \   "^ " : [ "**/", ],
@@ -199,6 +257,9 @@ nnoremap <Esc> :noh<CR><Esc>
 map <C-s> :w<CR>
 imap <C-s> <Esc>:w<CR>
 
+" Toogle buffer zoom
+map <Leader>zw <C-w>o
+
 "Ctrl + Space to auto complete on local buff
 imap <C-Space> <C-P>
 "move to next/previous line with same indentation
@@ -209,9 +270,9 @@ nnoremap <M-.> :call search('^'. matchstr(getline(line('.')), '\(\s*\)') .'\S')<
 nmap <Leader>fd :cf /tmp/autotest.txt<CR> :compiler rubyunit<CR>
 
 "rspec test
-map <Leader>r :SweetSpec<CR>
-map <Leader>R :SweetSpecRunAtLine<CR>
-map <Leader>L :SweetSpecRunLast<CR>
+"map <Leader>r :SweetSpec<CR>
+"map <Leader>R :SweetSpecRunAtLine<CR>
+"map <Leader>L :SweetSpecRunLast<CR>
 
 
 "-----------------------------------------------------------------------------
@@ -270,7 +331,19 @@ let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
-let g:CommandTMatchWindowAtTop = 1
+let g:miniBufExplSplitBelow = 0
 
 " Indent guides
 "let g:indent_guides_guide_size = 1
+"
+" Remember last location in file, but not for commit messages.
+" see :help last-position-jump
+au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
+  \| exe "normal! g`\"" | endif
+
+if has("gui_running")
+  if has("autocmd")
+    " Automatically resize splits when resizing MacVim window
+    autocmd VimResized * wincmd =
+  endif
+endif
