@@ -13,10 +13,10 @@ Bundle 'gmarik/vundle'
 "
 " original repos on github
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Lokaltog/vim-powerline'
+"Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/syntastic'
+"Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-pathogen'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-rails.git'
@@ -238,9 +238,10 @@ let g:ctrlp_map = '<Leader><Space>'
 let g:ctrlp_working_path_mode = 2
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_match_window_reversed = 0
+"nnoremap <silent> <F5> <Esc>:ClearCtrlPCache<CR>
 
 let MRU_Max_Entries = 400
-nnoremap <Leader>m :CtrlPMRU<CR>
+nnoremap <Leader>j :CtrlPMRU<CR>
 nnoremap <Leader>b :CtrlPBuffer<CR>
 "nnoremap <Leader>f <C-^>
 set wildignore+=*.o,*.obj,.git
