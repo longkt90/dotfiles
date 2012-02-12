@@ -36,7 +36,7 @@ Bundle 'vim-scripts/ZoomWin'
 Bundle 'vim-scripts/matchit.zip'
 Bundle 'vim-scripts/greplace.vim'
 Bundle 'itspriddle/vim-jquery'
-Bundle 'fholgado/minibufexpl.vim'
+"Bundle 'fholgado/minibufexpl.vim'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'snipmate-snippets'
@@ -45,11 +45,13 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'garbas/vim-snipmate'
 Bundle 'vim-ruby/vim-ruby'
+Bundle 'wincent/Command-T'
 
 " vim-scripts repos
 Bundle 'L9'
 Bundle 'vis'
 Bundle 'bocau'
+Bundle 'YankRing.vim'
 
 "-----------------------------------------------------------------------------
 " General
@@ -223,6 +225,7 @@ cmap w!! w !sudo tee % >/dev/null
 "imap ;; <Esc>
 imap jk <Esc>
 imap kj <Esc>
+imap jj <Esc>
 "Remap VIM 0
 noremap 0 ^
 noremap ^ 0
@@ -234,15 +237,19 @@ nnoremap gG :OpenURL http://www.google.com/search?q=<cword><CR>
 nnoremap gA :Ack! <cword><CR>
 
 nnoremap <silent> <F3> :TlistToggle<CR>
-let g:ctrlp_map = '<Leader><Space>'
-let g:ctrlp_working_path_mode = 2
+let g:CommandTMatchWindowAtTop = 1
+nnoremap <Leader><Space> :CommandT<CR>
+nnoremap <Leader>b :CommandTBuffer<CR>
+nnoremap <silent> <F4> :CommandTFlush<CR>
+"let g:ctrlp_map = '<Leader><Space>'
+"let g:ctrlp_working_path_mode = 2
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_match_window_reversed = 0
 "nnoremap <silent> <F5> <Esc>:ClearCtrlPCache<CR>
 
 let MRU_Max_Entries = 400
 nnoremap <Leader>j :CtrlPMRU<CR>
-nnoremap <Leader>b :CtrlPBuffer<CR>
+"nnoremap <Leader>b :CtrlPBuffer<CR>
 "nnoremap <Leader>f <C-^>
 set wildignore+=*.o,*.obj,.git
 
@@ -328,11 +335,11 @@ let g:fuf_splitPathMatching=1
 let g:changes_vcs_system='git'
 
 "Mini buffer
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
-let g:miniBufExplSplitBelow = 0
+"let g:miniBufExplMapWindowNavVim = 1
+"let g:miniBufExplMapWindowNavArrows = 1
+"let g:miniBufExplMapCTabSwitchBufs = 1
+"let g:miniBufExplModSelTarget = 1
+"let g:miniBufExplSplitBelow = 0
 
 " Indent guides
 "let g:indent_guides_guide_size = 1
