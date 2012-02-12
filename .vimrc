@@ -185,10 +185,10 @@ set cindent
 let mapleader = ","
 
 "save
-"map <C-h> <C-w>h
-"map <C-j> <C-w>j
-"map <C-k> <C-w>k
-"map <C-l> <C-w>l
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 if has("gui_macvim") && has("gui_running")
   imap <D-]> <Esc>>>i
@@ -217,6 +217,13 @@ map <Leader>a :Ack <cword><CR>
 
 "vmap <tab> >gv
 "vmap <tab> >gv
+if exists(":Tabularize")
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:\zs<CR>
+  vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
+
 
 "a trick for sudo save
 cmap w!! w !sudo tee % >/dev/null
