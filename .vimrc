@@ -46,12 +46,15 @@ Bundle 'mileszs/ack.vim'
 Bundle 'garbas/vim-snipmate'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'wincent/Command-T'
+Bundle 'tienle/vim-itermux'
 
 " vim-scripts repos
 Bundle 'L9'
 Bundle 'vis'
 Bundle 'bocau'
 Bundle 'YankRing.vim'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'kikijump/tslime.vim'
 
 "-----------------------------------------------------------------------------
 " General
@@ -76,7 +79,11 @@ endif
 " Colors/ Theme
 "-----------------------------------------------------------------------------
 colo bocau
-set guifont=ProggyCleanTT\ 11
+if !has('mac')
+  set guifont=ProggyCleanTT\ 11
+else
+  set guifont=Monaco\ 13
+endif
 
 if has("syntax")
   syntax on
@@ -116,7 +123,7 @@ if has('statusline')
   " Broken down into easily includeable segments
   set statusline=%<%f\    " Filename
   set statusline+=%w%h%m%r " Options
-  set statusline+=%{fugitive#statusline()} "  Git Hotness
+  "set statusline+=%{fugitive#statusline()} "  Git Hotness
   set statusline+=\ [%{&ff}/%Y]            " filetype
   set statusline+=\ [%{getcwd()}]          " current dir
   "set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
@@ -203,6 +210,9 @@ nmap <leader>fef ggVG=
 
 nmap <leader>q :bd<CR>
 
+" close quickfix window
+nmap <leader>w :ccl<CR>
+
 map <M-J> :m +1 <CR>
 map <M-K> :m -2 <CR>
 vnoremap <M-J> dp'[V']
@@ -212,7 +222,7 @@ vnoremap > >gv
 "noremap H ^
 "noremap L $
 map <F2> :NERDTreeToggle<CR>
-map <Leader>a :Ack <cword><CR>
+"map <Leader>a :Ack <cword><CR>
 "nmap <tab> v>
 
 "vmap <tab> >gv
@@ -220,8 +230,8 @@ map <Leader>a :Ack <cword><CR>
 if exists(":Tabularize")
   nmap <Leader>a= :Tabularize /=<CR>
   vmap <Leader>a= :Tabularize /=<CR>
-  nmap <Leader>a: :Tabularize /:\zs<CR>
-  vmap <Leader>a: :Tabularize /:\zs<CR>
+  nmap <Leader>a: :Tabularize /:<CR>
+  vmap <Leader>a: :Tabularize /:<CR>
 endif
 
 
@@ -260,11 +270,6 @@ nnoremap <Leader>j :CtrlPMRU<CR>
 "nnoremap <Leader>f <C-^>
 set wildignore+=*.o,*.obj,.git
 
-"recursive search for FufFile
-let g:fuf_abbrevMap = {
-  \   "^ " : [ "**/", ],
-  \ }
-let g:fuf_file_exclude = '\v\~$|\.(o|exe|dll|bak|swp)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])'
 "clear highlight search
 nnoremap <Esc> :noh<CR><Esc>
 
@@ -361,4 +366,11 @@ if has("gui_running")
     " Automatically resize splits when resizing MacVim window
     autocmd VimResized * wincmd =
   endif
+endif
+
+let g:no_itermux_mappings = 1
+let g:itermux_session_name = 'rspec'
+if has('mac')
+  nmap <leader>T <Plug>SendTestToiTerm
+  nmap <leader>t <Plug>SendFocusedTestToiTerm
 endif
