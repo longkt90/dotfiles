@@ -370,6 +370,7 @@ endif
 
 let g:no_itermux_mappings = 1
 let g:itermux_session_name = 'rspec'
+let g:rspec_drb = 1
 if has('mac')
   nmap <leader>T <Plug>SendTestToiTerm
   nmap <leader>t <Plug>SendFocusedTestToiTerm
