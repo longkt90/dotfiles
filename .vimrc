@@ -82,7 +82,7 @@ colo bocau
 if !has('mac')
   set guifont=ProggyCleanTT\ 11
 else
-  set guifont=Monaco\ 13
+  set guifont=Monaco:h13
 endif
 
 if has("syntax")
@@ -211,7 +211,9 @@ nmap <leader>fef ggVG=
 nmap <leader>q :bd<CR>
 
 " close quickfix window
-nmap <leader>w :ccl<CR>
+nmap <leader>z :ccl<CR>
+
+nmap <leader>w :w<CR>
 
 map <M-J> :m +1 <CR>
 map <M-K> :m -2 <CR>
