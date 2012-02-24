@@ -211,7 +211,7 @@ nmap <leader>fef ggVG=
 nmap <leader>q :bd<CR>
 
 " close quickfix window
-nmap <leader>z :ccl<CR>
+nmap <leader>x :ccl<CR>
 
 nmap <leader>w :w<CR>
 
@@ -221,6 +221,9 @@ vnoremap <M-J> dp'[V']
 vnoremap <M-K> dkP'[V']
 vnoremap < <gv
 vnoremap > >gv
+
+nnoremap <silent> vv <C-w>v
+nnoremap <silent> ss <C-w>s
 "noremap H ^
 "noremap L $
 map <F2> :NERDTreeToggle<CR>
@@ -293,6 +296,13 @@ nnoremap <M-.> :call search('^'. matchstr(getline(line('.')), '\(\s*\)') .'\S')<
 
 "autotest
 nmap <Leader>fd :cf /tmp/autotest.txt<CR> :compiler rubyunit<CR>
+
+" RSI preventions
+imap <silent> <M-k> _
+nnoremap <M-'> ci'
+imap <M-'> <Esc>ci'
+nnoremap <M-"> ci"
+imap <M-"> <Esc>ci"
 
 "rspec test
 "map <Leader>r :SweetSpec<CR>
