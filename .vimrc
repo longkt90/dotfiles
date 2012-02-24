@@ -282,6 +282,9 @@ imap <C-s> <Esc>:w<CR>
 " Toogle buffer zoom
 map <Leader>zw <C-w>o
 
+" make Y consistent with C and D
+nnoremap Y y$
+
 "Ctrl + Space to auto complete on local buff
 imap <C-Space> <C-P>
 "move to next/previous line with same indentation
