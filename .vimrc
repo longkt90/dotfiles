@@ -80,7 +80,7 @@ endif
 "-----------------------------------------------------------------------------
 colo bocau
 if !has('mac')
-  set guifont=ProggyCleanTT\ 11
+  set guifont=ProggyCleanTT\ 14
 else
   set guifont=Monaco:h13
 endif
@@ -125,7 +125,7 @@ if has('statusline')
   set statusline+=%w%h%m%r " Options
   "set statusline+=%{fugitive#statusline()} "  Git Hotness
   set statusline+=\ [%{&ff}/%Y]            " filetype
-  set statusline+=\ [%{getcwd()}]          " current dir
+  "set statusline+=\ [%{getcwd()}]          " current dir
   "set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
   set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 endif
@@ -206,7 +206,7 @@ else
 endif
 
 " format the entire file
-nmap <leader>fef ggVG=
+nmap <leader>fef gg=G<C-O><C-O>
 
 nmap <leader>q :bd<CR>
 
@@ -215,15 +215,43 @@ nmap <leader>x :ccl<CR>
 
 nmap <leader>w :w<CR>
 
-map <M-J> :m +1 <CR>
-map <M-K> :m -2 <CR>
-vnoremap <M-J> dp'[V']
-vnoremap <M-K> dkP'[V']
+if has("gui_macvim") && has("gui_running")
+  map <D-J> :m +1 <CR>
+  map <D-K> :m -2 <CR>
+  map <D-j> 4j
+  map <D-k> 4k
+  vnoremap <D-J> dp'[V']
+  vnoremap <D-K> dkP'[V']
+  "move to next/previous line with same indentation
+  nnoremap <D-,> k:call search('^'. matchstr(getline(line('.')+1), '\(\s*\)') .'\S', 'b')<CR>^
+  nnoremap <D-.> :call search('^'. matchstr(getline(line('.')), '\(\s*\)') .'\S')<CR>^
+  " RSI preventions
+  imap <silent> <D-k> _
+  nnoremap <D-'> ci'
+  imap <D-'> <Esc>ci'
+  nnoremap <D-"> ci"
+  imap <D-"> <Esc>ci"
+else
+  map <M-J> :m +1 <CR>
+  map <M-K> :m -2 <CR>
+  map <M-j> 4j
+  map <M-k> 4k
+  vnoremap <M-J> dp'[V']
+  vnoremap <M-K> dkP'[V']
+  "move to next/previous line with same indentation
+  nnoremap <M-,> k:call search('^'. matchstr(getline(line('.')+1), '\(\s*\)') .'\S', 'b')<CR>^
+  nnoremap <M-.> :call search('^'. matchstr(getline(line('.')), '\(\s*\)') .'\S')<CR>^
+  " RSI preventions
+  imap <silent> <M-k> _
+  nnoremap <M-'> ci'
+  imap <M-'> <Esc>ci'
+  nnoremap <M-"> ci"
+  imap <M-"> <Esc>ci"
+endif
 vnoremap < <gv
 vnoremap > >gv
 
 nnoremap <silent> vv <C-w>v
-nnoremap <silent> ss <C-w>s
 "noremap H ^
 "noremap L $
 map <F2> :NERDTreeToggle<CR>
@@ -245,8 +273,6 @@ cmap w!! w !sudo tee % >/dev/null
 
 " map esc
 "imap ;; <Esc>
-imap jk <Esc>
-imap kj <Esc>
 imap jj <Esc>
 "Remap VIM 0
 noremap 0 ^
@@ -290,19 +316,9 @@ nnoremap Y y$
 
 "Ctrl + Space to auto complete on local buff
 imap <C-Space> <C-P>
-"move to next/previous line with same indentation
-nnoremap <M-,> k:call search('^'. matchstr(getline(line('.')+1), '\(\s*\)') .'\S', 'b')<CR>^
-nnoremap <M-.> :call search('^'. matchstr(getline(line('.')), '\(\s*\)') .'\S')<CR>^
 
 "autotest
 nmap <Leader>fd :cf /tmp/autotest.txt<CR> :compiler rubyunit<CR>
-
-" RSI preventions
-imap <silent> <M-k> _
-nnoremap <M-'> ci'
-imap <M-'> <Esc>ci'
-nnoremap <M-"> ci"
-imap <M-"> <Esc>ci"
 
 "rspec test
 "map <Leader>r :SweetSpec<CR>
