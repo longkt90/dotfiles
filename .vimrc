@@ -260,12 +260,10 @@ map <F2> :NERDTreeToggle<CR>
 
 "vmap <tab> >gv
 "vmap <tab> >gv
-if exists(":Tabularize")
-  nmap <Leader>a= :Tabularize /=<CR>
-  vmap <Leader>a= :Tabularize /=<CR>
-  nmap <Leader>a: :Tabularize /:<CR>
-  vmap <Leader>a: :Tabularize /:<CR>
-endif
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:<CR>
+vmap <Leader>a: :Tabularize /:<CR>
 
 
 "a trick for sudo save
@@ -274,6 +272,8 @@ cmap w!! w !sudo tee % >/dev/null
 " map esc
 "imap ;; <Esc>
 imap jj <Esc>
+imap jk <Esc>
+
 "Remap VIM 0
 noremap 0 ^
 noremap ^ 0
@@ -403,6 +403,6 @@ let g:no_itermux_mappings = 1
 let g:itermux_session_name = 'rspec'
 let g:rspec_drb = 1
 if has('mac')
-  nmap <leader>T <Plug>SendTestToiTerm
-  nmap <leader>t <Plug>SendFocusedTestToiTerm
+  nmap <leader>T <ESC>:call SendTestToiTerm(expand('%'))<CR>
+  nmap <leader>t <ESC>:call SendFocusedTestToiTerm(expand('%'), line('.'))<CR>
 endif
