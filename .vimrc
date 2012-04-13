@@ -260,12 +260,10 @@ map <F2> :NERDTreeToggle<CR>
 
 "vmap <tab> >gv
 "vmap <tab> >gv
-if exists(":Tabularize")
-  nmap <Leader>a= :Tabularize /=<CR>
-  vmap <Leader>a= :Tabularize /=<CR>
-  nmap <Leader>a: :Tabularize /:<CR>
-  vmap <Leader>a: :Tabularize /:<CR>
-endif
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:<CR>
+vmap <Leader>a: :Tabularize /:<CR>
 
 
 "a trick for sudo save
@@ -274,9 +272,19 @@ cmap w!! w !sudo tee % >/dev/null
 " map esc
 "imap ;; <Esc>
 imap jj <Esc>
+imap kj <Esc>
+imap jk <Esc>
+"Remap VIM 0
+"Remap VIM 0
 "Remap VIM 0
 noremap 0 ^
 noremap ^ 0
+
+" make Y consistent with C and D
+nnoremap Y y$
+
+"Ctrl + Space to auto complete on local buff
+imap <C-Space> <C-P>
 
 "Expand current file's path
 cnoremap <C-F> <C-R>=expand('%:p:h')<CR>
@@ -311,14 +319,8 @@ imap <C-s> <Esc>:w<CR>
 " Toogle buffer zoom
 map <Leader>zw <C-w>o
 
-" make Y consistent with C and D
-nnoremap Y y$
-
-"Ctrl + Space to auto complete on local buff
-imap <C-Space> <C-P>
-
 "autotest
-nmap <Leader>fd :cf /tmp/autotest.txt<CR> :compiler rubyunit<CR>
+"nmap <Leader>fd :cf /tmp/autotest.txt<CR> :compiler rubyunit<CR>
 
 "rspec test
 "map <Leader>r :SweetSpec<CR>
@@ -331,6 +333,8 @@ nmap <Leader>fd :cf /tmp/autotest.txt<CR> :compiler rubyunit<CR>
 "-----------------------------------------------------------------------------
 " Edit .vimrc
 au! BufRead,BufNewFile *.haml setfiletype haml
+au! BufRead,BufNewFile *.hamlc setfiletype haml
+au! BufRead,BufNewFile *.rabl setfiletype ruby
 
 "auto open NERDTree when start
 "autocmd VimEnter * NERDTree
