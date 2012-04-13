@@ -272,10 +272,8 @@ cmap w!! w !sudo tee % >/dev/null
 " map esc
 "imap ;; <Esc>
 imap jj <Esc>
-imap kj <Esc>
 imap jk <Esc>
-"Remap VIM 0
-"Remap VIM 0
+
 "Remap VIM 0
 noremap 0 ^
 noremap ^ 0
@@ -318,6 +316,12 @@ imap <C-s> <Esc>:w<CR>
 
 " Toogle buffer zoom
 map <Leader>zw <C-w>o
+
+" make Y consistent with C and D
+nnoremap Y y$
+
+"Ctrl + Space to auto complete on local buff
+imap <C-Space> <C-P>
 
 "autotest
 "nmap <Leader>fd :cf /tmp/autotest.txt<CR> :compiler rubyunit<CR>
@@ -407,6 +411,6 @@ let g:no_itermux_mappings = 1
 let g:itermux_session_name = 'rspec'
 let g:rspec_drb = 1
 if has('mac')
-  nmap <leader>T <Plug>SendTestToiTerm
-  nmap <leader>t <Plug>SendFocusedTestToiTerm
+  nmap <leader>T <ESC>:call SendTestToiTerm(expand('%'))<CR>
+  nmap <leader>t <ESC>:call SendFocusedTestToiTerm(expand('%'), line('.'))<CR>
 endif
