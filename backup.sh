@@ -9,6 +9,7 @@ cp ~/.inputrc .
 cp ~/.zshrc .
 cp ~/.gemrc .
 cp ~/.rdebugrc .
+cp ~/.tmux.conf .
 
 git status
 git add .
