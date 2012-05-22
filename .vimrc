@@ -78,7 +78,11 @@ endif
 "-----------------------------------------------------------------------------
 " Colors/ Theme
 "-----------------------------------------------------------------------------
+if !has("gui_running")
+  set t_Co=256
+endif
 colo bocau
+
 if !has('mac')
   set guifont=ProggyCleanTT\ 14
 else
@@ -255,6 +259,7 @@ nnoremap <silent> vv <C-w>v
 "noremap H ^
 "noremap L $
 map <F2> :NERDTreeToggle<CR>
+map <Leader>f :NERDTreeToggle<CR>
 "map <Leader>a :Ack <cword><CR>
 "nmap <tab> v>
 
@@ -295,6 +300,7 @@ let g:CommandTMatchWindowAtTop = 1
 nnoremap <Leader><Space> :CommandT<CR>
 nnoremap <Leader>b :CommandTBuffer<CR>
 nnoremap <silent> <F4> :CommandTFlush<CR>
+nnoremap <Leader>u :CommandTFlush<CR>
 "let g:ctrlp_map = '<Leader><Space>'
 "let g:ctrlp_working_path_mode = 2
 let g:ctrlp_match_window_bottom = 0
