@@ -1,0 +1,9 @@
+Xft.lcdfilter: lcddefault
+XTerm*VT100.Translations:		#override \n\
+  s<Btn4Down>: string("0x9b") string("[64~") \n\
+  s<Btn5Down>: string("0x9b") string("[65~") \n\
+  <Btn4Down>: string("0x9b") string("[62~") \n\
+  <Btn5Down>: string("0x9b") string("[63~") \n\
+  <Btn4Up>: \n\
+  <Btn5Up>:
+

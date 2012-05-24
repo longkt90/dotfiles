@@ -34,7 +34,8 @@ plugins=(rails3 ruby bundler heroku vi-mode)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/local/bin:/usr/local/sbin/:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/java/jdk1.6.0_20/bin:/usr/local/ant/bin:/opt/java/jre/bin:/usr/lib/perl5/vendor_perl/bin:/usr/lib/perl5/core_perl/bin:/opt/qt/bin:/home/ti/.rvm/bin:/home/ti/elasticsearch-0.19.1/bin:/usr/bin/vendor_perl/
+export PATH=/usr/local/bin:/usr/local/sbin/:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/java/jdk1.6.0_20/bin:/usr/local/ant/bin:/opt/java/jre/bin:/usr/lib/perl5/vendor_perl/bin:/usr/lib/perl5/core_perl/bin:/opt/qt/bin:/home/ti/.rvm/bin:/home/ti/elasticsearch-0.19.4/bin:/usr/bin/vendor_perl/
+export TERM=xterm-256color
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 cdpath=(. $HOME/code $HOME/fun )

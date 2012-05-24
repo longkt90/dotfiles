@@ -121,6 +121,15 @@ win 180 50
 set mousehide                         " hide mouse after chars typed
 set mouse=a                           " mouse in all modes
 
+map <M-Esc>[62~ <ScrollWheelUp>
+map! <M-Esc>[62~ <ScrollWheelUp>
+map <M-Esc>[63~ <ScrollWheelDown>
+map! <M-Esc>[63~ <ScrollWheelDown>
+map <M-Esc>[64~ <S-ScrollWheelUp>
+map! <M-Esc>[64~ <S-ScrollWheelUp>
+map <M-Esc>[65~ <S-ScrollWheelDown>
+map! <M-Esc>[65~ <S-ScrollWheelDown>
+
 if has('statusline')
   set laststatus=2                    " always show status line
 
