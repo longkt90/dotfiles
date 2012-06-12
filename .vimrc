@@ -55,6 +55,7 @@ Bundle 'bocau'
 Bundle 'YankRing.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'kikijump/tslime.vim'
+Bundle 'jeffkreeftmeijer/vim-numbertoggle'
 
 "-----------------------------------------------------------------------------
 " General
@@ -80,6 +81,7 @@ endif
 "-----------------------------------------------------------------------------
 if !has("gui_running")
   set t_Co=256
+  set term=xterm-256color
 endif
 colo bocau
 
@@ -117,7 +119,7 @@ set ch=1                              " command line height
 set backspace=indent,eol,start        " backspace through everything in insert mode
 set report=0                          " tell us about changes
 set guioptions=aegitcm
-win 180 50
+"win 180 50
 set mousehide                         " hide mouse after chars typed
 set mouse=a                           " mouse in all modes
 
@@ -181,7 +183,7 @@ set expandtab
 set list
 " List chars
 set listchars=""                  " Reset the listchars
-set listchars=tab:\ \             " a tab should display as "  ", trailing whitespace as "."
+set listchars=tab:\`\             " a tab should display as "  ", trailing whitespace as "."
 set listchars+=trail:.            " show trailing spaces as dots
 set listchars+=extends:>          " The character to show in the last column when wrap is
                                   " off and the line continues beyond the right of the screen
@@ -246,9 +248,9 @@ if has("gui_macvim") && has("gui_running")
   imap <D-"> <Esc>ci"
 else
   map <M-J> :m +1 <CR>
-  map <M-K> :m -2 <CR>
-  map <M-j> 4j
-  map <M-k> 4k
+  "map <M-K> :m -2 <CR>
+  "map <C-j> 4j
+  "map <C-k> 4k
   vnoremap <M-J> dp'[V']
   vnoremap <M-K> dkP'[V']
   "move to next/previous line with same indentation
@@ -268,7 +270,7 @@ nnoremap <silent> vv <C-w>v
 "noremap H ^
 "noremap L $
 map <F2> :NERDTreeToggle<CR>
-map <Leader>f :NERDTreeToggle<CR>
+map <Leader>nt :NERDTreeToggle<CR>
 "map <Leader>a :Ack <cword><CR>
 "nmap <tab> v>
 
@@ -306,6 +308,7 @@ nnoremap gA :Ack! <cword><CR>
 
 nnoremap <silent> <F3> :TlistToggle<CR>
 let g:CommandTMatchWindowAtTop = 1
+let g:CommandTCancelMap=['<ESC>']
 nnoremap <Leader><Space> :CommandT<CR>
 nnoremap <Leader>b :CommandTBuffer<CR>
 nnoremap <silent> <F4> :CommandTFlush<CR>
