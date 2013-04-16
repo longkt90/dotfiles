@@ -13,7 +13,7 @@ Bundle 'gmarik/vundle'
 "
 " original repos on github
 Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'Lokaltog/vim-powerline'
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 "Bundle 'scrooloose/syntastic'
@@ -35,18 +35,20 @@ Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'vim-scripts/ZoomWin'
 Bundle 'vim-scripts/matchit.zip'
 Bundle 'vim-scripts/greplace.vim'
+Bundle 'vim-scripts/globalreplace.vim'
 Bundle 'itspriddle/vim-jquery'
-"Bundle 'fholgado/minibufexpl.vim'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'snipmate-snippets'
 Bundle 'garbas/vim-snipmate'
 Bundle 'kien/ctrlp.vim'
-Bundle 'mileszs/ack.vim'
+Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'rking/ag.vim'
 Bundle 'garbas/vim-snipmate'
 Bundle 'vim-ruby/vim-ruby'
-Bundle 'wincent/Command-T'
+"Bundle 'wincent/Command-T'
 Bundle 'tienle/vim-itermux'
+Bundle 'ervandew/supertab'
 
 " vim-scripts repos
 Bundle 'L9'
@@ -55,7 +57,9 @@ Bundle 'bocau'
 Bundle 'YankRing.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'kikijump/tslime.vim'
-Bundle 'jeffkreeftmeijer/vim-numbertoggle'
+Bundle 'Rainbow-Parenthesis'
+Bundle 'groenewege/vim-less'
+"Bundle 'jeffkreeftmeijer/vim-numbertoggle'
 
 "-----------------------------------------------------------------------------
 " General
@@ -81,14 +85,16 @@ endif
 "-----------------------------------------------------------------------------
 if !has("gui_running")
   set t_Co=256
-  set term=xterm-256color
+  if !has('mac')
+    set term=xterm-256color
+  endif
 endif
 colo bocau
 
 if !has('mac')
   set guifont=ProggyCleanTT\ 14
 else
-  set guifont=Monaco:h13
+  set guifont=Menlo:h13
 endif
 
 if has("syntax")
@@ -122,6 +128,7 @@ set guioptions=aegitcm
 "win 180 50
 set mousehide                         " hide mouse after chars typed
 set mouse=a                           " mouse in all modes
+set ttymouse=xterm
 
 map <M-Esc>[62~ <ScrollWheelUp>
 map! <M-Esc>[62~ <ScrollWheelUp>
@@ -223,12 +230,16 @@ endif
 " format the entire file
 nmap <leader>fef gg=G<C-O><C-O>
 
+nmap <Leader>gr :call MISC_GlobalReplace()<cr>
+
 nmap <leader>q :bd<CR>
 
 " close quickfix window
 nmap <leader>x :ccl<CR>
 
 nmap <leader>w :w<CR>
+
+nmap <CR> :write<CR>
 
 if has("gui_macvim") && has("gui_running")
   map <D-J> :m +1 <CR>
@@ -271,7 +282,6 @@ nnoremap <silent> vv <C-w>v
 "noremap L $
 map <F2> :NERDTreeToggle<CR>
 map <Leader>nt :NERDTreeToggle<CR>
-"map <Leader>a :Ack <cword><CR>
 "nmap <tab> v>
 
 "vmap <tab> >gv
@@ -304,25 +314,25 @@ imap <C-Space> <C-P>
 cnoremap <C-F> <C-R>=expand('%:p:h')<CR>
 
 nnoremap gG :OpenURL http://www.google.com/search?q=<cword><CR>
-nnoremap gA :Ack! <cword><CR>
+nnoremap gA :Ag! <cword><CR>
 
-nnoremap <silent> <F3> :TlistToggle<CR>
-let g:CommandTMatchWindowAtTop = 1
-let g:CommandTCancelMap=['<ESC>']
-nnoremap <Leader><Space> :CommandT<CR>
-nnoremap <Leader>b :CommandTBuffer<CR>
-nnoremap <silent> <F4> :CommandTFlush<CR>
-nnoremap <Leader>u :CommandTFlush<CR>
-"let g:ctrlp_map = '<Leader><Space>'
+let g:ctrlp_map = '<Leader><Space>'
 "let g:ctrlp_working_path_mode = 2
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_match_window_reversed = 0
-"nnoremap <silent> <F5> <Esc>:ClearCtrlPCache<CR>
-
 let MRU_Max_Entries = 400
+
+nnoremap <silent> <F4> <Esc>:ClearCtrlPCache<CR>
+nnoremap <silent> <F3> :TlistToggle<CR>
+nnoremap <Leader>u :ClearCtrlPCache<CR>
 nnoremap <Leader>j :CtrlPMRU<CR>
-"nnoremap <Leader>b :CtrlPBuffer<CR>
-"nnoremap <Leader>f <C-^>
+nnoremap <Leader>b :CtrlPBuffer<CR>
+nnoremap <Leader>f <C-^>
+nnoremap <leader>ec :CtrlP app/controllers<cr>
+nnoremap <leader>es :CtrlP spec/<cr>
+nnoremap <leader>em :CtrlP app/models<cr>
+nnoremap <leader>ev :CtrlP app/views<cr>
+
 set wildignore+=*.o,*.obj,.git
 
 "clear highlight search
@@ -341,12 +351,18 @@ nnoremap Y y$
 "Ctrl + Space to auto complete on local buff
 imap <C-Space> <C-P>
 
+" Resize splits like a boss
+nnoremap <S-Up> :exe "resize " . (winheight(0) * 11/10)<CR>
+nnoremap <S-Down> :exe "resize " . (winheight(0) * 10/11)<CR>
+nnoremap <S-Left> :exe "vertical resize " . (winwidth(0) * 10/11)<CR>
+nnoremap <S-Right> :exe "vertical resize " . (winwidth(0) * 11/10)<CR>
+
 "autotest
 "nmap <Leader>fd :cf /tmp/autotest.txt<CR> :compiler rubyunit<CR>
 
-"rspec test
-"map <Leader>r :SweetSpec<CR>
-"map <Leader>R :SweetSpecRunAtLine<CR>
+"zeus rspec test
+map <Leader>R :call RunTestInZeus(expand('%'))<CR>
+map <Leader>r :call RunTestInZeus(expand('%'). ':' . line('.'))<CR>
 "map <Leader>L :SweetSpecRunLast<CR>
 
 
@@ -432,3 +448,36 @@ if has('mac')
   nmap <leader>T <ESC>:call SendTestToiTerm(expand('%'))<CR>
   nmap <leader>t <ESC>:call SendFocusedTestToiTerm(expand('%'), line('.'))<CR>
 endif
+
+" Powerline theme
+let g:Powerline_symbols     = 'fancy'
+"let g:Powerline_theme       = 'skwp'
+"let g:Powerline_colorscheme = 'skwp'
+
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+function! RunTestInZeus(test_file)
+  exec "!zeus rspec --no-color " . a:test_file
+endfunction
+

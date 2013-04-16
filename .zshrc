@@ -29,17 +29,26 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(rails3 ruby bundler heroku vi-mode history-substring-search)
+plugins=(ruby heroku)
 
 source $ZSH/oh-my-zsh.sh
 
-# Customize to your needs...
-export PATH=/usr/local/bin:/usr/local/sbin/:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/java/jdk1.6.0_20/bin:/usr/local/ant/bin:/opt/java/jre/bin:/usr/lib/perl5/vendor_perl/bin:/usr/lib/perl5/core_perl/bin:/opt/qt/bin:/home/ti/.rvm/bin:/home/ti/elasticsearch-0.19.4/bin:/usr/bin/vendor_perl/
-export TERM=xterm-256color
+# export TERM=xterm-256color
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
+# bindkey "^R" history-incremental-search-backward
+
+# Customize to your needs...
+export EC2_HOME=~/.ec2
+export EC2_PRIVATE_KEY=~/.ec2/pk-XUYVOZGS6BUUF76DR3VVA2OTF7FOABVZ.pem
+export EC2_CERT=~/.ec2/cert-XUYVOZGS6BUUF76DR3VVA2OTF7FOABVZ.pem
+export AWS_ACCESS_KEY_ID=AKIAIGZQPWQTIWGO5VDQ
+export AWS_SECRET_ACCESS_KEY=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
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/Users/tienle/.rvm/bin
+export BUNDLER_EDITOR=mvim
+
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 cdpath=(. $HOME/code $HOME/fun )
-gvim()
-{
-  (unset GEM_PATH GEM_HOME; command gvim "$@")
-}
+__rvm_project_rvmrc
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
