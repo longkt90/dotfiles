@@ -481,3 +481,8 @@ function! RunTestInZeus(test_file)
   exec "!zeus rspec --no-color " . a:test_file
 endfunction
 
+" Easymotion
+let g:EasyMotion_leader_key = '\'
+let g:EasyMotion_mapping_f  = '<Leader>m'
+let g:EasyMotion_keys       = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+let g:EasyMotion_do_shade   = 0
