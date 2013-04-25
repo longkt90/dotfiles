@@ -49,6 +49,7 @@ Bundle 'vim-ruby/vim-ruby'
 "Bundle 'wincent/Command-T'
 Bundle 'tienle/vim-itermux'
 Bundle 'ervandew/supertab'
+Bundle 'sjl/gundo.vim'
 
 " vim-scripts repos
 Bundle 'L9'
@@ -73,8 +74,9 @@ set modeline
 set autoread                          " reload file
 set tabpagemax=50                     " open 50 tabs max
 set splitbelow
+set splitright
 if version>=730
-  set undodir=/tmp
+  set undodir=~/.vim/.tmp,~/tmp,~/.tmp,/tmp
   set undofile
   set undolevels=1000
 endif
@@ -89,7 +91,16 @@ if !has("gui_running")
     set term=xterm-256color
   endif
 endif
-colo bocau
+
+syntax enable
+
+set background=dark
+let g:solarized_termcolors=256
+let g:solarized_contrast='high'
+let g:solarized_visibility='high'
+let g:solarized_termtrans=1
+colorscheme solarized
+"color bocau
 
 if !has('mac')
   set guifont=ProggyCleanTT\ 14
@@ -109,7 +120,7 @@ set hls                               " Highlighting search result
 set nobackup
 set nowritebackup
 set noswapfile
-set backupdir=/tmp/
+set backupdir=~/tmp,/tmp
 set backupcopy=yes
 set backupskip=/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*
 set directory=/tmp
@@ -228,7 +239,7 @@ else
 endif
 
 " format the entire file
-nmap <leader>fef gg=G<C-O><C-O>
+map === mmgg=G`m^zz
 
 nmap <Leader>gr :call MISC_GlobalReplace()<cr>
 
@@ -327,11 +338,23 @@ nnoremap <silent> <F3> :TlistToggle<CR>
 nnoremap <Leader>u :ClearCtrlPCache<CR>
 nnoremap <Leader>j :CtrlPMRU<CR>
 nnoremap <Leader>b :CtrlPBuffer<CR>
-nnoremap <Leader>f <C-^>
+nnoremap <Leader><Leader> <C-^>
 nnoremap <leader>ec :CtrlP app/controllers<cr>
 nnoremap <leader>es :CtrlP spec/<cr>
 nnoremap <leader>em :CtrlP app/models<cr>
 nnoremap <leader>ev :CtrlP app/views<cr>
+
+nnoremap <F5> :GundoToggle<CR>
+
+" Skip to Model, View or Controller
+map <Leader>rm :Rmodel
+map <Leader>rv :Rview
+map <Leader>rc :Rcontroller
+
+map // <plug>NERDCommenterToggle
+
+" Duplicate a selection in Visual mode: D
+vmap D y'>p
 
 set wildignore+=*.o,*.obj,.git
 
@@ -361,8 +384,8 @@ nnoremap <S-Right> :exe "vertical resize " . (winwidth(0) * 11/10)<CR>
 "nmap <Leader>fd :cf /tmp/autotest.txt<CR> :compiler rubyunit<CR>
 
 "zeus rspec test
-map <Leader>R :call RunTestInZeus(expand('%'))<CR>
-map <Leader>r :call RunTestInZeus(expand('%'). ':' . line('.'))<CR>
+map <Leader>z :call RunTestInZeus(expand('%'))<CR>
+map <Leader>Z :call RunTestInZeus(expand('%'). ':' . line('.'))<CR>
 "map <Leader>L :SweetSpecRunLast<CR>
 
 
@@ -481,8 +504,39 @@ function! RunTestInZeus(test_file)
   exec "!zeus rspec --no-color " . a:test_file
 endfunction
 
-" Easymotion
+"  ---------------------------------------------------------------------------
+"  Easymotion
+"  ---------------------------------------------------------------------------
 let g:EasyMotion_leader_key = '\'
 let g:EasyMotion_mapping_f  = '<Leader>m'
 let g:EasyMotion_keys       = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
 let g:EasyMotion_do_shade   = 0
+
+
+"  ---------------------------------------------------------------------------
+"  When vimrc, either directly or via symlink, is edited, automatically reload it
+"  ---------------------------------------------------------------------------
+autocmd! bufwritepost .vimrc source %
+autocmd! bufwritepost vimrc source %
+
+
+"  ---------------------------------------------------------------------------
+"  Other files to consider Ruby
+"  ---------------------------------------------------------------------------
+au BufRead,BufNewFile Gemfile,Rakefile,Thorfile,config.ru,Vagrantfile,Guardfile,Capfile set ft=ruby
+
+
+"  ---------------------------------------------------------------------------
+"  CoffeeScript
+"  ---------------------------------------------------------------------------
+
+let coffee_compile_vert = 1
+au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
+
+"  ---------------------------------------------------------------------------
+"  SASS / SCSS
+"  ---------------------------------------------------------------------------
+
+au BufNewFile,BufReadPost *.scss setl foldmethod=indent
+au BufNewFile,BufReadPost *.sass setl foldmethod=indent
+au BufRead,BufNewFile *.scss set filetype=scss
