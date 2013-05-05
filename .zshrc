@@ -21,7 +21,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
@@ -33,18 +33,15 @@ plugins=(ruby heroku)
 
 source $ZSH/oh-my-zsh.sh
 
-# export TERM=xterm-256color
-
 # bindkey "^R" history-incremental-search-backward
 
 # Customize to your needs...
 export EC2_HOME=~/.ec2
 export EC2_PRIVATE_KEY=~/.ec2/pk-XUYVOZGS6BUUF76DR3VVA2OTF7FOABVZ.pem
 export EC2_CERT=~/.ec2/cert-XUYVOZGS6BUUF76DR3VVA2OTF7FOABVZ.pem
-export AWS_ACCESS_KEY_ID=AKIAIGZQPWQTIWGO5VDQ
-export AWS_SECRET_ACCESS_KEY=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
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/Users/tienle/.rvm/bin
 export BUNDLER_EDITOR=mvim
+export LC_ALL=utf8
 
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 cdpath=(. $HOME/code $HOME/fun )
