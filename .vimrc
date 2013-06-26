@@ -54,6 +54,7 @@ Bundle 'ervandew/supertab'
 Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-cucumber'
+Bundle 'christoomey/vim-tmux-navigator'
 
 " vim-scripts repos
 Bundle 'L9'
@@ -204,7 +205,7 @@ set shiftwidth=2
 set encoding=utf-8
 set vb t_vb=
 set virtualedit=all
-set textwidth=80
+"set textwidth=80
 set smartcase
 set expandtab
 set list
@@ -601,10 +602,3 @@ let g:turbux_command_test_unit = 'ruby'
 let g:turbux_command_cucumber  = 'cucumber'
 let g:turbux_command_turnip    = 'rspec'
 
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
