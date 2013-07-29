@@ -79,6 +79,7 @@ set autoread                          " reload file
 set tabpagemax=50                     " open 50 tabs max
 set splitbelow
 set splitright
+set complete-=i
 if version>=730
   set undodir=~/.vim/.tmp,~/tmp,~/.tmp,/tmp
   set undofile
@@ -565,33 +566,33 @@ endfunction
 "  ---------------------------------------------------------------------------
 "  Folding
 "  ---------------------------------------------------------------------------
-set foldmethod=syntax
-set foldnestmax=10
-set nofoldenable                        "don't fold by default
-set foldlevel=1
-setl foldtext=CustomFoldText()
+"set foldmethod=syntax
+"set foldnestmax=10
+"set nofoldenable                        "don't fold by default
+"set foldlevel=1
+"setl foldtext=CustomFoldText()
 
-fu! CustomFoldText()
-  "get first non-blank line
-  let fs = v:foldstart
-  while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
-  endwhile
-  if fs > v:foldend
-    let line = getline(v:foldstart)
-  else
-    let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
-  endif
+"fu! CustomFoldText()
+  ""get first non-blank line
+  "let fs = v:foldstart
+  "while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
+  "endwhile
+  "if fs > v:foldend
+    "let line = getline(v:foldstart)
+  "else
+    "let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
+  "endif
 
-  let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
-  let foldSize = 1 + v:foldend - v:foldstart
-  let foldSizeStr = " " . foldSize . " lines "
-  "let foldLevelStr = repeat("+--", v:foldlevel)
-  let foldLevelStr = ''
-  let lineCount = line("$")
-  let foldPercentage = printf("[%.1f", (foldSize*1.0)/lineCount*100) . "%] "
-  let expansionString = repeat(".", w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage))
-  return line . expansionString .  foldSizeStr . foldPercentage .  foldLevelStr
-endf
+  "let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+  "let foldSize = 1 + v:foldend - v:foldstart
+  "let foldSizeStr = " " . foldSize . " lines "
+  ""let foldLevelStr = repeat("+--", v:foldlevel)
+  "let foldLevelStr = ''
+  "let lineCount = line("$")
+  "let foldPercentage = printf("[%.1f", (foldSize*1.0)/lineCount*100) . "%] "
+  "let expansionString = repeat(".", w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage))
+  "return line . expansionString .  foldSizeStr . foldPercentage .  foldLevelStr
+"endf
 
 "  ---------------------------------------------------------------------------
 "  Tmux configuration
