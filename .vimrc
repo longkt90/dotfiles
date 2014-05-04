@@ -55,6 +55,8 @@ Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-cucumber'
 Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'tpope/vim-dispatch'
+Bundle 'ecomba/vim-ruby-refactoring'
 
 " vim-scripts repos
 Bundle 'L9'
@@ -365,7 +367,7 @@ map <Leader>c<space> <plug>NERDCommenterToggle
 " Duplicate a selection in Visual mode: D
 vmap D y'>p
 
-set wildignore+=*.o,*.obj,.git
+set wildignore+=*.o,*.obj,.git,.pdf,tmp/
 
 "clear highlight search
 nnoremap <Esc> :noh<CR><Esc>
@@ -392,9 +394,9 @@ nnoremap <S-Right> :exe "vertical resize " . (winwidth(0) * 11/10)<CR>
 "autotest
 "nmap <Leader>fd :cf /tmp/autotest.txt<CR> :compiler rubyunit<CR>
 
-"zeus rspec test
-map <Leader>z :call RunTestInZeus(expand('%'))<CR>
-map <Leader>Z :call RunTestInZeus(expand('%'). ':' . line('.'))<CR>
+"Dispatch rspec test
+map <Leader>d :call RunTestInDispatch(expand('%'))<CR>
+map <Leader>D :call RunTestInDispatch(expand('%'). ':' . line('.'))<CR>
 "map <Leader>L :SweetSpecRunLast<CR>
 
 
@@ -436,7 +438,7 @@ let Tlist_Show_One_File = 1       " Only show tags for current buffer
 let Tlist_Enable_Fold_Column = 0  " no fold column (only showing one file)
 let tlist_sql_settings = 'sql;P:package;t:table'
 let tlist_ant_settings = 'ant;p:Project;r:Property;t:Target'
-"let Tlist_Ctags_Cmd = $VIM.'/vimfiles/ctags.exe' " location of ctags tool
+let Tlist_Ctags_Cmd = '/usr/local/bin/ctags' " location of ctags tool
 let g:rails_ctags_arguments = "`gem env gemdir`/gems"
 set tags=tags;/
 let g:rails_ctags_arguments = "`gem env gemdir`/gems"
@@ -509,8 +511,8 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-function! RunTestInZeus(test_file)
-  exec "!zeus rspec --no-color " . a:test_file
+function! RunTestInDispatch(test_file)
+  exec "Dispatch zeus rspec " . a:test_file
 endfunction
 
 "  ---------------------------------------------------------------------------
@@ -568,7 +570,7 @@ endfunction
 "  ---------------------------------------------------------------------------
 "set foldmethod=syntax
 "set foldnestmax=10
-"set nofoldenable                        "don't fold by default
+set nofoldenable                        "don't fold by default
 "set foldlevel=1
 "setl foldtext=CustomFoldText()
 
@@ -598,8 +600,18 @@ endfunction
 "  Tmux configuration
 "  ---------------------------------------------------------------------------
 let g:turbux_runner            = 'tslime'
-let g:turbux_command_rspec     = 'rspec'
+let g:turbux_command_rspec     = 'zeus rspec'
 let g:turbux_command_test_unit = 'ruby'
 let g:turbux_command_cucumber  = 'cucumber'
 let g:turbux_command_turnip    = 'rspec'
 
+command! Todo Ag! 'TODO|FIXME'
+command! Fixme Ag! 'FIXME'
+
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif

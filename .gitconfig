@@ -28,3 +28,7 @@
   trustExitCode = true
 [core]
   editor = vim
+[mergetool]
+	keepBackup = false
+[push]
+	default = current

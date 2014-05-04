@@ -10,6 +10,13 @@ ZSH_THEME="robbyrussell"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zs="zeus s"
+alias zt="zeus rspec"
+alias zc="zeus c"
+alias zr="zeus rake"
+alias zg="zeus g"
+alias zd="zeus d"
+alias ctags="`brew --prefix`/bin/ctags"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -29,7 +36,7 @@ DISABLE_AUTO_TITLE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(ruby heroku)
+plugins=(ruby heroku bundler)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -39,17 +46,19 @@ source $ZSH/oh-my-zsh.sh
 export EC2_HOME=~/.ec2
 export EC2_PRIVATE_KEY=~/.ec2/pk-XUYVOZGS6BUUF76DR3VVA2OTF7FOABVZ.pem
 export EC2_CERT=~/.ec2/cert-XUYVOZGS6BUUF76DR3VVA2OTF7FOABVZ.pem
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/Users/tienle/.rvm/bin
 export BUNDLER_EDITOR=mvim
 export EDITOR=vim
 export LC_ALL=en_US.UTF-8
+export JAVA_HOME=$(/usr/libexec/java_home)
+export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/Users/tienle/.rvm/bin:/usr/local/heroku/bin:${JAVA_HOME}/bin:${EC2_HOME}/bin:$PATH"
+
+[[ $TERM = "screen-256color" ]] && cd ..;1
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 
 cdpath=(. $HOME/code $HOME/fun )
-__rvm_project_rvmrc
+#__rvm_project_rvmrc
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-[[ $TERM = "screen-256color" ]] && cd ..;1
