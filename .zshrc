@@ -51,6 +51,8 @@ export EDITOR=vim
 export LC_ALL=en_US.UTF-8
 export JAVA_HOME=$(/usr/libexec/java_home)
 export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
+export KEYPAY_BASE_URI=https://eh-staging.yourpayroll.com.au/api/v2/
+export KEYPAY_DEBUG=true
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/Users/tienle/.rvm/bin:/usr/local/heroku/bin:${JAVA_HOME}/bin:${EC2_HOME}/bin:$PATH"

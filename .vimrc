@@ -4,69 +4,72 @@ set nocompatible
 " Vundle
 "-----------------------------------------------------------------------------
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 " My Bundles here:
 "
 " original repos on github
-Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'Lokaltog/vim-powerline'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-"Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-pathogen'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-rails.git'
-Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-bundler'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-repeat'
-Bundle 'godlygeek/tabular'
-Bundle 'mutewinter/vim-indent-guides'
-Bundle 'pangloss/vim-javascript'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'leshill/vim-json'
-Bundle 'kana/vim-textobj-user'
-Bundle 'nelstrom/vim-textobj-rubyblock'
-Bundle 'vim-scripts/ZoomWin'
-Bundle 'vim-scripts/matchit.zip'
-Bundle 'vim-scripts/greplace.vim'
-Bundle 'vim-scripts/globalreplace.vim'
-Bundle 'itspriddle/vim-jquery'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'snipmate-snippets'
-Bundle 'garbas/vim-snipmate'
-Bundle 'kien/ctrlp.vim'
-Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'rking/ag.vim'
-Bundle 'garbas/vim-snipmate'
-Bundle 'vim-ruby/vim-ruby'
-"Bundle 'wincent/Command-T'
-"Bundle 'tienle/vim-itermux'
-Bundle 'jgdavey/vim-turbux'
-Bundle 'jgdavey/tslime.vim'
-Bundle 'ervandew/supertab'
-Bundle 'sjl/gundo.vim'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-cucumber'
-Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'tpope/vim-dispatch'
-Bundle 'ecomba/vim-ruby-refactoring'
+Plugin 'Lokaltog/vim-easymotion'
+"Plugin 'Lokaltog/vim-powerline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+"Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-pathogen'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-rails.git'
+Plugin 'tpope/vim-haml'
+Plugin 'tpope/vim-bundler'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-repeat'
+Plugin 'godlygeek/tabular'
+Plugin 'mutewinter/vim-indent-guides'
+Plugin 'pangloss/vim-javascript'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'leshill/vim-json'
+Plugin 'kana/vim-textobj-user'
+Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'vim-scripts/ZoomWin'
+Plugin 'vim-scripts/matchit.zip'
+Plugin 'vim-scripts/greplace.vim'
+Plugin 'vim-scripts/globalreplace.vim'
+Plugin 'itspriddle/vim-jquery'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'snipmate-snippets'
+Plugin 'kien/ctrlp.vim'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'rking/ag.vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'vim-ruby/vim-ruby'
+"Plugin 'wincent/Command-T'
+"Plugin 'tienle/vim-itermux'
+Plugin 'jgdavey/vim-turbux'
+Plugin 'jgdavey/tslime.vim'
+Plugin 'ervandew/supertab'
+Plugin 'sjl/gundo.vim'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-cucumber'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tpope/vim-dispatch'
+Plugin 'ecomba/vim-ruby-refactoring'
 
 " vim-scripts repos
-Bundle 'L9'
-Bundle 'vis'
-Bundle 'bocau'
-Bundle 'YankRing.vim'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'Rainbow-Parenthesis'
-Bundle 'groenewege/vim-less'
-"Bundle 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'L9'
+Plugin 'vis'
+Plugin 'bocau'
+Plugin 'YankRing.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'Rainbow-Parenthesis'
+Plugin 'groenewege/vim-less'
+"Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'Valloric/YouCompleteMe'
+
+call vundle#end()            " required
+
 
 "-----------------------------------------------------------------------------
 " General
@@ -258,6 +261,16 @@ nmap <leader>x :ccl<CR>
 nmap <leader>w :w<CR>
 
 nmap <CR> :write<CR>
+nmap S :%s//g<LEFT><LEFT>
+vmap S :s//g<LEFT><LEFT>
+" Visual Block mode is far more useful that Visual mode (so swap the commands)...
+" nnoremap v <C-V>
+" nnoremap <C-V> v
+" vnoremap v <C-V>
+" vnoremap <C-V> v
+vmap aa VGo1G
+nnoremap <Space> <PageDown>
+set virtualedit=block
 
 if has("gui_macvim") && has("gui_running")
   map <D-J> :m +1 <CR>
@@ -353,8 +366,8 @@ nnoremap <leader>ev :CtrlP app/views<cr>
 
 nnoremap <F5> :GundoToggle<CR>
 
-nnoremap <Space> za
-vnoremap <Space> za
+"nnoremap <Space> za
+"vnoremap <Space> za
 
 " Skip to Model, View or Controller
 map <Leader>rm :Rmodel
@@ -615,3 +628,10 @@ if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
+"  ---------------------------------------------------------------------------
+"  YouCompleteMe
+"  ---------------------------------------------------------------------------
+let g:ycm_min_num_of_chars_for_completion = 6
+let g:ycm_auto_trigger = 1
+
