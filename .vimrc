@@ -67,6 +67,7 @@ Plugin 'Rainbow-Parenthesis'
 Plugin 'groenewege/vim-less'
 "Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'gregsexton/gitv'
 
 call vundle#end()            " required
 
@@ -380,7 +381,7 @@ map <Leader>c<space> <plug>NERDCommenterToggle
 " Duplicate a selection in Visual mode: D
 vmap D y'>p
 
-set wildignore+=*.o,*.obj,.git,.pdf,tmp/
+set wildignore+=*.o,*.obj,.git,.pdf,tmp/,node_modules/
 
 "clear highlight search
 nnoremap <Esc> :noh<CR><Esc>
